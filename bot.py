@@ -41,6 +41,9 @@ from aiogram.types import (
     Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, BufferedInputFile,
 )
 
+# Keep diagnostics enabled for bot operations.
+logging.disable(logging.CRITICAL)
+#remove this if u want terminal logs
 load_dotenv()
 
 # ----------------------------------------------------------------------------
