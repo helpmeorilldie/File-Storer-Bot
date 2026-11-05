@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#11171b">
+<meta name="description" content="Erebus File Storer Bot — share files through secure Telegram links with a join-to-unlock gate.">
+<title>Erebus — File Storer Bot</title>
+<style>
+:root{--bg:#11171b;--panel:rgba(255,255,255,.065);--panel2:rgba(255,255,255,.09);--line:rgba(255,255,255,.12);--text:#f3f7f8;--muted:#9aa9ae;--cyan:#53d9e8;--cyan2:#a0f4f7;--red:#ff626b;--radius:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% 0%,rgba(54,190,207,.14),transparent 34%),radial-gradient(ellipse at 0% 38%,rgba(255,98,107,.07),transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(17,23,27,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em}.brand-icon{width:40px;height:40px;display:grid;place-items:center;border:1px solid rgba(83,217,232,.35);background:rgba(83,217,232,.12);border-radius:13px;color:var(--cyan);font-size:20px}.navlinks{display:flex;gap:25px;color:var(--muted);font-size:14px}.navlinks a:hover{color:var(--cyan)}.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;padding:11px 18px;background:var(--cyan);color:#071316;font-weight:800;font-size:14px;transition:.2s;border:1px solid transparent}.nav-cta:hover,.button:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(83,217,232,.2)}.button.secondary{background:rgba(255,255,255,.06);border-color:var(--line);color:var(--text)}
+.hero{padding:96px 0 76px;display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(83,217,232,.28);background:rgba(83,217,232,.08);color:var(--cyan2);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px var(--cyan)}h1{font-size:clamp(44px,6vw,72px);line-height:1.04;letter-spacing:-.055em;margin:22px 0 18px}h1 span{color:var(--cyan)}.lead{max-width:590px;color:#b3c0c4;font-size:18px;margin:0 0 28px}.actions{display:flex;flex-wrap:wrap;gap:12px}.fine{font-size:12px;color:var(--muted);margin-top:18px}.visual{position:relative;min-height:420px;display:grid;place-items:center}.orb{position:absolute;width:330px;height:330px;border-radius:50%;background:rgba(83,217,232,.1);filter:blur(42px)}.mock{position:relative;width:min(100%,420px);padding:22px;border:1px solid rgba(255,255,255,.17);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.035));backdrop-filter:blur(24px);box-shadow:0 30px 90px rgba(0,0,0,.38);transform:rotate(2deg)}.mock-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px}.mock-title{font-weight:800}.status{font-size:11px;color:var(--cyan);background:rgba(83,217,232,.1);padding:5px 9px;border-radius:999px}.file-row{display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}.file-ico{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:rgba(83,217,232,.12);color:var(--cyan);font-size:19px}.file-row strong{display:block;font-size:13px}.file-row small{color:var(--muted);font-size:11px}.file-size{margin-left:auto;color:var(--muted);font-size:11px}.gate{margin-top:18px;padding:15px;border:1px solid rgba(255,98,107,.25);background:rgba(255,98,107,.07);border-radius:16px}.gate b{font-size:13px}.gate p{font-size:11px;color:var(--muted);margin:4px 0 12px}.gate-btn{display:block;text-align:center;background:var(--cyan);color:#071316;border-radius:10px;padding:9px;font-size:12px;font-weight:900}
+.section{padding:76px 0}.section-head{max-width:650px;margin-bottom:32px}.kicker{color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.section h2{font-size:clamp(30px,4vw,44px);line-height:1.13;letter-spacing:-.04em;margin:10px 0 12px}.section-head p{color:var(--muted);margin:0}.glass{background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.035));border:1px solid var(--line);backdrop-filter:blur(18px);border-radius:var(--radius)}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.flow-card{padding:22px;position:relative;overflow:hidden}.num{color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:.12em}.flow-card h3{margin:12px 0 5px;font-size:17px}.flow-card p{margin:0;color:var(--muted);font-size:13px}.flow-icon{font-size:25px;margin-top:20px}
+.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.feature{padding:22px;display:flex;gap:16px}.feature-icon{flex:0 0 44px;height:44px;display:grid;place-items:center;border-radius:14px;background:rgba(83,217,232,.1);color:var(--cyan);font-size:20px}.feature h3{font-size:16px;margin:0 0 5px}.feature p{font-size:13px;color:var(--muted);margin:0}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.admin-card{padding:24px}.admin-card h3{margin:0 0 15px}.admin-card ul{list-style:none;padding:0;margin:0;display:grid;gap:11px;color:#bdc8cb;font-size:13px}.admin-card li:before{content:"✓";color:var(--cyan);font-weight:900;margin-right:10px}.admin-card .warn:before{color:var(--red)}
+.codebox{padding:22px;overflow:auto;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:16px;color:#d4e0e3;font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+.command-table{width:100%;border-collapse:collapse;font-size:13px}.command-table th,.command-table td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line)}.command-table th{color:var(--cyan);font-size:11px;letter-spacing:.1em;text-transform:uppercase}.command-table td{color:#c2cdd0}.command-table td:first-child{color:var(--text);font-family:ui-monospace,monospace}
+details{padding:17px 20px;margin:10px 0}summary{cursor:pointer;font-weight:750}details p{color:var(--muted);font-size:13px;margin:12px 0 0}
+.cta{padding:34px;display:flex;justify-content:space-between;align-items:center;gap:24px}.cta h2{margin:0 0 6px}.cta p{color:var(--muted);margin:0}
+footer{padding:32px 0 42px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.red{color:var(--red)}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding:70px 0 40px;gap:15px}.visual{min-height:370px}.navlinks{display:none}.flow{grid-template-columns:1fr}.feature-grid,.admin-grid{grid-template-columns:1fr}.cta{align-items:flex-start;flex-direction:column}}
+@media(max-width:480px){.wrap{width:min(100% - 28px,1120px)}.nav{height:66px}.brand{font-size:13px}.nav-cta{padding:9px 12px;font-size:12px}.hero{padding-top:55px}h1{font-size:47px}.lead{font-size:16px}.mock{padding:17px}.visual{min-height:340px}.section{padding:55px 0}.cta{padding:24px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="#top"><span class="brand-icon">▣</span><span>EREBUS <span style="color:var(--cyan)">FILE STORER</span></span></a>
+<nav class="navlinks"><a href="#about">About</a><a href="#features">Features</a><a href="#setup">Setup</a><a href="#commands">Commands</a></nav>
+<a class="nav-cta" href="https://t.me/ErebusDocBot" target="_blank" rel="noopener">Open Bot ↗</a>
+</div></header>
+<main id="top">
+<section class="wrap hero">
+<div>
+<div class="eyebrow"><span class="dot"></span> Telegram file delivery system</div>
+<h1>Your files.<br><span>One smart link.</span></h1>
+<p class="lead">Share files through secure links, behind a join-to-unlock gate. Store once in your private Telegram vault and deliver instantly whenever someone opens the link.</p>
+<div class="actions"><a class="button" href="https://t.me/ErebusDocBot" target="_blank" rel="noopener">Start @ErebusDocBot ↗</a><a class="button secondary" href="#features">Explore features ↓</a></div>
+<p class="fine">Hosted by <strong style="color:var(--text)">Erebus</strong> · Owner <strong style="color:var(--text)">Haze</strong> · <a href="https://t.me/Noxmirage" target="_blank" rel="noopener" style="color:var(--cyan)">@Noxmirage</a></p>
+</div>
+<div class="visual"><div class="orb"></div><div class="mock">
+<div class="mock-top"><div class="mock-title">▣ Your file vault</div><span class="status">● READY</span></div>
+<div class="file-row"><div class="file-ico">▤</div><div><strong>project-notes.pdf</strong><small>PDF document · Stored</small></div><span class="file-size">2.4 MB</span></div>
+<div class="file-row"><div class="file-ico">▧</div><div><strong>summer-video.mp4</strong><small>Video · Stored</small></div><span class="file-size">18 MB</span></div>
+<div class="file-row"><div class="file-ico">▧</div><div><strong>image-pack.zip</strong><small>Archive · Stored</small></div><span class="file-size">6.8 MB</span></div>
+<div class="gate"><b><span class="red">◆</span> Join to unlock</b><p>Join the required channels, then verify your membership to receive your files.</p><span class="gate-btn">I've Joined ✓</span></div>
+</div></div>
+</section>
+<section class="section" id="about"><div class="wrap">
+<div class="section-head"><div class="kicker">How it works</div><h2>Upload once. Share anywhere.</h2><p>Erebus turns your Telegram uploads into shareable deep links, while keeping the original files organized in a private storage channel.</p></div>
+<div class="flow">
+<div class="glass flow-card"><span class="num">01 / UPLOAD</span><div class="flow-icon">📤</div><h3>Send your files</h3><p>Admins upload one or multiple files to the bot and finish with Done.</p></div>
+<div class="glass flow-card"><span class="num">02 / GENERATE</span><div class="flow-icon">🔗</div><h3>Get one share link</h3><p>The bot stores the files in your private vault and creates a Telegram deep link.</p></div>
+<div class="glass flow-card"><span class="num">03 / DELIVER</span><div class="flow-icon">⚡</div><h3>Unlock & receive</h3><p>Visitors join the required chats, tap I've Joined, and receive the linked files.</p></div>
+</div>
+</div></section>
+<section class="section" id="features"><div class="wrap">
+<div class="section-head"><div class="kicker">Built for simple sharing</div><h2>Everything in one bot.</h2><p>A clean experience for users, with powerful controls for administrators.</p></div>
+<div class="feature-grid">
+<div class="glass feature"><div class="feature-icon">🔒</div><div><h3>Join to unlock</h3><p>Require users to join selected channels or groups before files are delivered.</p></div></div>
+<div class="glass feature"><div class="feature-icon">⚡</div><div><h3>Instant delivery</h3><p>Every file attached to a link is sent together after membership is verified.</p></div></div>
+<div class="glass feature"><div class="feature-icon">✉️</div><div><h3>Message admin</h3><p>Users can contact support with text, photos, or files and receive replies in the bot.</p></div></div>
+<div class="glass feature"><div class="feature-icon">📦</div><div><h3>Multi-file links</h3><p>Bundle multiple uploads into one convenient shareable link.</p></div></div>
+<div class="glass feature"><div class="feature-icon">🛡️</div><div><h3>Content protection</h3><p>Optional Telegram content protection can restrict forwarding and saving in supported clients.</p></div></div>
+<div class="glass feature"><div class="feature-icon">⏱️</div><div><h3>Auto-delete timer</h3><p>Set delivered files to disappear from a user's chat after a configured interval.</p></div></div>
+</div>
+</div></section>
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Admin control center</div><h2>Manage links with confidence.</h2><p>Tools to manage your audience, storage links, protection settings, and bot activity.</p></div>
+<div class="admin-grid">
+<div class="glass admin-card"><h3>🔗 Link management</h3><ul><li>Revoke, reactivate, rename, or delete links</li><li>Test-open links and view open counts</li><li>Per-link protection and auto-delete options</li><li>Set defaults or enable Protect All</li></ul></div>
+<div class="glass admin-card"><h3>📢 Audience & support</h3><ul><li>Add or remove required channels and groups</li><li>Broadcast text, photos, and media</li><li>Support inbox with replies through the bot</li><li>Ban and unban users</li></ul></div>
+<div class="glass admin-card"><h3>📊 Insights & exports</h3><ul><li>View users, links, opens, and top links</li><li>Export links and users as CSV</li><li>Review bot usage statistics</li></ul></div>
+<div class="glass admin-card"><h3>💾 Backups & storage</h3><ul><li>Automatic database backups</li><li>One-tap backup restore</li><li>Private Telegram channel as file storage</li><li>Keep the latest backup copies available</li></ul></div>
+</div>
+</div></section>
+<section class="section" id="setup"><div class="wrap">
+<div class="section-head"><div class="kicker">Quick setup</div><h2>Bring your bot online.</h2><p>Configure your private storage channel and environment before starting the Python bot.</p></div>
+<div class="glass admin-card" style="margin-bottom:14px"><h3>01 — Create a private storage channel</h3><ul><li>Create a private Telegram channel to use as your vault.</li><li>Add your bot as an administrator with permission to post messages.</li><li>Copy the channel ID (usually starts with <code>-100</code>).</li></ul></div>
+<div class="glass admin-card" style="margin-bottom:14px"><h3>02 — Configure environment</h3><div class="codebox">BOT_TOKEN=your_bot_token
+OWNER_ID=your_telegram_user_id
+ADMIN_IDS=
+STORAGE_CHANNEL_ID=-1001234567890
+BACKUP_EVERY_HOURS=1
+USE_CUSTOM_EMOJI=1</div><p style="color:var(--muted);font-size:12px;margin-bottom:0">Keep your .env file private. Never publish your bot token or share it in screenshots.</p></div>
+<div class="glass admin-card"><h3>03 — Install and run</h3><div class="codebox">pip install -r requirements.txt
+python filestore_bot.py</div></div>
+</div></section>
+<section class="section" id="commands"><div class="wrap">
+<div class="section-head"><div class="kicker">Bot commands</div><h2>Shortcuts that get it done.</h2><p>Use these commands in your Telegram chat with the bot.</p></div>
+<div class="glass" style="overflow:hidden"><table class="command-table"><thead><tr><th>Command</th><th>Access</th><th>Action</th></tr></thead><tbody>
+<tr><td>/start</td><td>Everyone</td><td>Main menu or open a file link</td></tr><tr><td>/admin</td><td>Admin</td><td>Open the admin panel</td></tr><tr><td>/new</td><td>Admin</td><td>Create a new file link</td></tr><tr><td>/done</td><td>Admin</td><td>Finish uploading files</td></tr><tr><td>/ban · /unban</td><td>Admin</td><td>Manage user access</td></tr><tr><td>/backup · /restore</td><td>Admin</td><td>Backup or restore bot data</td></tr><tr><td>/cancel</td><td>Everyone</td><td>Cancel the current step</td></tr>
+</tbody></table></div>
+</div></section>
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Good to know</div><h2>Frequently asked questions.</h2></div>
+<details class="glass"><summary>Can the bot store more than one file per link?</summary><p>Yes. Admins can upload multiple files, tap Done, and receive one link for the complete batch.</p></details>
+<details class="glass"><summary>How does join-to-unlock work?</summary><p>When a visitor opens a link, the bot checks membership in the required chats. If they have joined, they can verify and receive the files.</p></details>
+<details class="glass"><summary>Does content protection prevent every kind of copying?</summary><p>No. Telegram's protected-content setting can restrict forwarding and saving in supported clients, but it cannot prevent every possible capture (for example, photographing a screen with another device).</p></details>
+<details class="glass"><summary>Why might membership verification fail?</summary><p>The bot generally needs administrator access in each required channel or group so Telegram allows it to check membership. Also verify that the chat ID or username is correct.</p></details>
+</div></section>
+<section class="wrap section" style="padding-top:10px"><div class="glass cta">
+<div><div class="kicker">Ready when you are</div><h2>Meet Erebus File Storer.</h2><p>Open the bot on Telegram and start sharing with a single link.</p></div>
+<a class="button" href="https://t.me/ErebusDocBot" target="_blank" rel="noopener">Launch @ErebusDocBot ↗</a>
+</div></section>
+</main>
+<footer><div class="wrap foot"><span>© <span id="year"></span> <strong style="color:var(--text)">EREBUS FILE STORER BOT</strong> · Hosted by Erebus</span><span>Owner Haze · <a href="https://t.me/Noxmirage" target="_blank" rel="noopener">@Noxmirage</a> · <a href="https://t.me/ErebusDocBot" target="_blank" rel="noopener" style="color:var(--cyan)">@ErebusDocBot</a></span></div></footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
